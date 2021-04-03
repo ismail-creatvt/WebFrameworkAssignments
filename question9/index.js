@@ -25,4 +25,12 @@ con.connect((err)=>{
         }
         console.log(result)
     })
+    const selectQuery = "SELECT * FROM CUSTOMER";
+    con.query(selectQuery, (err, result)=>{
+        if(err){
+            console.log(err)
+            return
+        }
+        console.log(result)
+    })
 })
