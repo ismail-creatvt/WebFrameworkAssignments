@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>File Append Tool</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
+
+        * {
+            margin: 0;
+        }
+
+        body {
+            font-family: 'Roboto';
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #46016e;
+        }
+
+        #container {
+            width: 300px;
+            min-height: 300px;
+            background: #fff;
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        input {
+            width: 100%;
+        }
+
+        button {
+            width: 100%;
+            height: 50px;
+            font-size: 18px;
+            background: #095df9;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+        }
+
+        button:focus {
+            border-radius: 4px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.12), 0 1px 4px rgba(0, 0, 0, 0.24);
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+            row-gap: 20px;
+        }
+
+        .upload {
+            background: #fff;
+            width: 100%;
+            height: 50px;
+            font-size: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 4px;
+            border: 0.5px solid #999999;
+        }
+
+        input[type="file"] {
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="container">
+        <form id="form" action="fileupload" method="post" enctype="multipart/form-data">
+            <label id="file1label" class="upload" for="file1">Select File 1</label>
+            <input type="file" name="file1" id="file1" accept="text/plain">
+            <label id="file2label" class="upload" for="file2">Select File 2</label>
+            <input type="file" name="file2" id="file2" accept="text/plain">
+            <button type="submit" value="Submit">Submit</button>
+        </form>
+    </div>
+
+    <script>
+        const file1Picker = document.querySelector("#file1")
+        const file1Label = document.querySelector("#file1label")
+        const file2Picker = document.querySelector("#file2")
+        const file2Label = document.querySelector("#file2label")
+        const form = document.querySelector("#form")
+
+        form.addEventListener("submit", function (e) {
+            if (file1Picker.files.length == 0 || file2Picker.files.length == 0) {
+                alert("Please pick files to send")
+                e.preventDefault()
+                return
+            }
+        })
+
+        function setFileName(e, label, placeholder) {
+            const filePathArray = e.split('\\')
+            console.log(e)
+            console.log(filePathArray)
+            if (filePathArray.length > 0) {
+                const fileName = filePathArray[filePathArray.length - 1]
+                label.innerHTML = fileName.length == 0 ? placeholder : fileName
+            }
+        }
+
+        file1Picker.addEventListener("change", function (e) {
+            setFileName(e.target.value, file1Label, "Select File 1")
+        })
+        file2Picker.addEventListener("change", function (e) {
+            setFileName(e.target.value, file2Label, "Select File 2")
+        })
+    </script>
+</body>
+
+</html>
