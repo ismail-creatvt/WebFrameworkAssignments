@@ -1,12 +1,146 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Database</title>
+    <style>
+        body {
+            background: #470999;
+            margin: 0;
+            height: 100vh;
+            width: 100vw;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        #container {
+            width: 400px;
+            max-width: 600px;
+            display: flex;
+            flex-grow: 1;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: #fff;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0px 3px 4px #6e6e6ee9;
+        }
+
+        #customers {
+            width: 100%;
+        }
+
+        tr:nth-of-type(odd) {
+            background: #e0e0e0;
+        }
+
+        tr:nth-of-type(even) {
+            background: #fff;
+        }
+
+        th {
+            height: 60px;
+            background: #373af0;
+            color: #fff;
+            font-style: bold;
+            font-size: 18px;
+        }
+
+        td {
+            width: auto;
+            padding: 20px;
+        }
+
+        td button {
+            width: 30px;
+        }
+
+        .buttoncell {
+            width: 30px;
+        }
+
+        .buttoncell button {
+            color: #990915;
+            font-size: 20px;
+            background: none;
+            border: none;
+        }
+    </style>
 </head>
+
 <body>
-    
+    <div id="container">
+        <h3>Customers</h3>
+        <table id="customers">
+            
+        </table>
+    </div>
+
+    <script>
+        const table = document.querySelector("#customers")
+        fetch("http://localhost:8888/customers")
+            .then((response) => response.json())
+            .then((data) => {
+                console.log(data)
+                createTable(data)
+            })
+            .catch((err) => console.log(err))
+
+        function deleteElement(id) {
+            console.log(`Deleting..${id}`)
+            fetch(`http://localhost:8888/customers?id=${id}`, {
+                method: 'DELETE',
+            }).then((response) => response.json())
+            .then((data)=> {
+                createTable(data)
+            }).catch((err)=>{
+                console.log(err)
+            })
+        }
+
+        function createTable(data) {
+            table.innerHTML = ''
+            const headRow = document.createElement('tr')
+            headRow.classList.add("cust")
+            const idHeadCell = document.createElement('th')
+            idHeadCell.innerHTML = "Id"
+            const nameHeadCell = document.createElement('th')
+            nameHeadCell.innerHTML = "Name"
+            const ageHeadCell = document.createElement('th')
+            ageHeadCell.innerHTML = "Age"
+            const buttonHeadCell = document.createElement('th')
+            headRow.appendChild(idHeadCell)
+            headRow.appendChild(nameHeadCell)
+            headRow.appendChild(ageHeadCell)
+            headRow.appendChild(buttonHeadCell)
+            table.appendChild(headRow)
+
+            data.forEach(element => {
+                const row = document.createElement('tr')
+                row.classList.add("cust")
+                const idCell = document.createElement('td')
+                idCell.innerHTML = element.id
+                const nameCell = document.createElement('td')
+                nameCell.innerHTML = element.name
+                const ageCell = document.createElement('td')
+                ageCell.innerHTML = element.age
+                const buttonCell = document.createElement('td')
+                buttonCell.classList.add("buttoncell")
+                buttonCell.innerHTML = `<button onClick="deleteElement(${element.id})">&#10060;</button>`
+
+                row.appendChild(idCell)
+                row.appendChild(nameCell)
+                row.appendChild(ageCell)
+                row.appendChild(buttonCell)
+                table.appendChild(row)
+            });
+        }
+    </script>
 </body>
+
 </html>
