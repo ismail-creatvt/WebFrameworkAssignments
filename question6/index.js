@@ -7,7 +7,7 @@ const server = http.createServer((req, res) => {
     const resource = fs.createReadStream(name)
 
     resource.on('open', () => {
-        res.writeHead(200, {'Content-dispositon':`attachment:${name}`})
+        res.writeHead(200, {'Content-dispositon':`attachment;${name}`})
         const result = resource.pipe(res)
         result.on('finish', () => {
             res.end()
