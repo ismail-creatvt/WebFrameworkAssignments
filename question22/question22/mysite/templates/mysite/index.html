@@ -1,0 +1,35 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Todo Items</title>
+    {% block extrahead %}
+    <link rel="stylesheet" href={% static 'mysite/style.css' %}>
+    {% endblock %}
+</head>
+<body>
+    <div id="container">
+        <table id="todoItems" cellspacing="0" cellpadding="0">
+            <tr>
+                <th>Title</th>
+                <th>Status</th>
+            </tr>
+            {% for item in todoItems %}
+                <tr>
+                    <td>{{ item.text }}</td>
+                    <td>{% if  item.completed %} 
+                            {{ 'Completed' }}
+                        {% else %} 
+                            {{'Not Completed'}}
+                        {% endif %}
+                    </td>
+                </tr>
+            {% endfor %}
+        </table>
+        <a id="add" href="/add"><button>Add New</button></a>
+    </div>
+</body>
+</html>
