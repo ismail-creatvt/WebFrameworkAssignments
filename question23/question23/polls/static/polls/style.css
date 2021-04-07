@@ -1,0 +1,107 @@
+body{
+    background-color: #005f63;
+    margin: 0;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+#container{
+    width:600px;
+    height:600px;
+    background-color: #fff;    
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 2px 2px 4px #3c4546;
+}
+
+table th, table td{
+    margin: 0;
+    border: none;
+    padding: 16px;
+}
+
+
+table {
+    display: block;
+    border: none;
+    max-height:500px;
+    width:100%;
+    border-collapse: collapse;
+}
+
+tbody{
+    display: block;
+    height:452px;
+    overflow-y: scroll;
+    width:100%;
+}
+
+thead{
+    display: block;
+    width: 100%;
+}
+
+thead th{
+    width: 100%;
+}
+
+
+tbody::-webkit-scrollbar{
+    width: 8px;
+}
+
+tbody::-webkit-scrollbar-track{
+    background: #dcf1ff;
+}
+
+tbody::-webkit-scrollbar-thumb{
+    background-color: #2f86c0;    /* color of the scroll thumb */
+    border-radius: 0px;       /* roundness of the scroll thumb */
+    border: none;  /* creates padding around scroll thumb */
+}
+
+table th{
+    background-color: #003b63;
+    color:#fff;
+}
+
+table tr:nth-child(odd){
+    background-color: rgb(228, 228, 228);
+}
+
+table tr:nth-child(odd){
+    background-color: rgb(162, 207, 247);
+}
+
+table td{
+    width:100%;
+}
+
+tbody td:nth-of-type(2), thead th:nth-of-type(2){
+    display: block;
+    width: 150px;
+    text-align: center;
+}
+
+button#poll{
+    width:550px;
+    height:50px;
+    border: none;
+    border-radius: 10px;
+    background-color: #003b63;
+    font-style: bold;
+    text-transform: uppercase;
+    color: #fff;
+}
+
+a#polllink{
+    display: block;
+    width:550px;
+    height:50px;
+    margin:25px;
+}
